@@ -30,11 +30,8 @@ cd linux-5.4.6/
 #Elements a compile custom kernel 
 make menuconfig
 #Build and compile custom kernel and create entries for utilisation and deb packages creates
-#-mykernel can be replace by your choice name of your custom kernel
-#-j options can be modified by number of cores of your CPU example : -j 8 = CPU octo-core, permit compile faster
-#-j options to be modified by number of CPU's in your PC.
-#Use command : grep -c '^processor' /proc/cpuinfo for obtain number of CPU's
-make-kpkg --append-to-version=-kaisenlinux --revision=1.0 --initrd --us --uc kernel_image kernel_headers -j 4
+#kaisenlinux can be replace by your choice name of your custom kernel
+make-kpkg --append-to-version=-kaisenlinux --revision=1.0 --initrd --us --uc kernel_image kernel_headers -j $(nproc)
 #Move parent directory
 cd ..
 #Install kernel custom with all .deb packages generates by make-kpkg

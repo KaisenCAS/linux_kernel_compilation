@@ -19,22 +19,22 @@ dpkg -i kernel-package_13.018+nmu1~bpo9+1_all.deb
 rm kernel-package_13.018+nmu1~bpo9+1_all.deb
 #Move to /usr/src directory for work
 cd /usr/src
-#Download kernel 5.4 on official source
-wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.tar.xz
+#Download kernel 5.4.6 on official source
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.6.tar.xz
 #Extract tar.xz archive
-tar xvf linux-5.4.tar.xz
+tar xvf linux-5.4.6.tar.xz
 #Remove tar archive after extract 
-rm linux-5.4.tar.xz
-#Move to folder linux-5.4 obtain for extract tar archive
-cd linux-5.4/
+rm linux-5.4.6.tar.xz
+#Move to folder linux-5.4.6 obtain for extract tar archive
+cd linux-5.4.6/
 #Elements a compile custom kernel 
 make menuconfig
-#Build and compile custom kernel and create entries for utilisation and deb packages creates 
+#Build and compile custom kernel and create entries for utilisation and deb packages creates
 #-mykernel can be replace by your choice name of your custom kernel
 #-j options can be modified by number of cores of your CPU example : -j 8 = CPU octo-core, permit compile faster
-#-j options to be modified by number of CPU's in your PC. 
+#-j options to be modified by number of CPU's in your PC.
 #Use command : grep -c '^processor' /proc/cpuinfo for obtain number of CPU's
-make-kpkg --append-to-version=-kernelcustom --revision=1.0 --initrd --us --uc kernel_image kernel_headers -j 4
+make-kpkg --append-to-version=-kaisenlinux --revision=1.0 --initrd --us --uc kernel_image kernel_headers -j 4
 #Move parent directory
 cd ..
 #Install kernel custom with all .deb packages generates by make-kpkg

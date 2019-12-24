@@ -23,4 +23,4 @@ and
 CONFIG_SYSTEM_TRUSTED_KEYRING
 Reviewing them.
 5. Reissue the make menuconfig command, save and exit.
-6. Restart the copilation, it should work normally.
+6. Restart the compilation, it should work normally.

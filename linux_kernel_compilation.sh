@@ -19,14 +19,14 @@ dpkg -i kernel-package_13.018+nmu1~bpo9+1_all.deb
 rm kernel-package_13.018+nmu1~bpo9+1_all.deb
 #Move to /usr/src directory for work
 cd /usr/src
-#Download kernel 5.4.6 on official source
-wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.6.tar.xz
+#Download kernel 5.3.9 on official source
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.3.9.tar.xz
 #Extract tar.xz archive
-tar xvf linux-5.4.6.tar.xz
+tar xvf linux-5.3.9.tar.xz
 #Remove tar archive after extract 
-rm linux-5.4.6.tar.xz
-#Move to folder linux-5.4.6 obtain for extract tar archive
-cd linux-5.4.6/
+rm linux-5.3.9.tar.xz
+#Move to folder linux-5.3.9 obtain for extract tar archive
+cd linux-5.3.9/
 #Elements a compile custom kernel 
 make menuconfig
 #Build and compile custom kernel and create entries for utilisation and deb packages creates

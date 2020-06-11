@@ -21,6 +21,12 @@ rm linux-5.6.19.tar.xz
 cd linux-5.6.19/
 #Kernel personnalization
 make menuconfig
+#Fix :
+#make[2]: *** No rule to make target 'debian/certs/benh@debian.org.cert.pem', needed by 'certs/x509_certificate_list'.
+#Stop. Makefile:951: recipe for target 'certs' failed
+sed -i -e "s/CONFIG_SYSTEM_TRUSTED_KEY./#CONFIG_SYSTEM_TRUSTED_KEY/g" .config
+sed -i -e "s/CONFIG_MODULE_SIG_KEY./#CONFIG_MODULE_SIG_KEY/g" .config
+sed -i -e "s/CONFIG_SYSTEM_TRUSTED_KEYRING./#CONFIG_SYSTEM_TRUSTED_KEYRING/g" .config
 #Build and compile custom kernel and create entries for utilisation and deb packages creates
 #customkernel can be replace by your choice name of your custom kernel
 make deb-pkg -j"$(nproc)" LOCALVERSION=-customkernel KDEB_PKGVERSION="$(make kernelversion)-1"

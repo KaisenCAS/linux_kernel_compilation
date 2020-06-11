@@ -11,28 +11,22 @@ apt-get update
 apt-get -y full-upgrade
 #Dependancies install for compile kernel sources (dependancies compatibles for kernel 4.x)
 apt-get install debconf-utils dpkg-dev debhelper build-essential libncurses5-dev libelf-dev liblz4-tool bc libssl-dev xz-utils ncurses-dev git initramfs-tools dpkg-dev bin86 libglib2.0-dev libgtk2.0-dev libglade2-dev libqt4-dev pkg-config bison flex po-debconf xmlto gettext wget rsync -y
-#Download kernel-package packet for Debian distributions
-wget http://ftp.fr.debian.org/debian/pool/main/k/kernel-package/kernel-package_13.018+nmu1~bpo9+1_all.deb
-#Install deb packet after download 
-dpkg -i kernel-package_13.018+nmu1~bpo9+1_all.deb
-#Remove kernel-package packet after install
-rm kernel-package_13.018+nmu1~bpo9+1_all.deb
 #Move to /usr/src directory for work
 cd /usr/src
-#Download kernel 5.4.31 on official source
-wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.4.31.tar.xz
+#Download kernel 5.6.19 on official source
+wget https://cdn.kernel.org/pub/linux/kernel/v5.x/linux-5.6.19.tar.xz
 #Extract tar.xz archive
-tar xvf linux-5.4.31.tar.xz
-#Remove tar archive after extract 
-rm linux-5.4.31.tar.xz
-#Move to folder linux-5.4.31 obtain for extract tar archive
-cd linux-5.4.31/
-#Elements a compile custom kernel 
+tar xvf linux-5.6.19.tar.xz
+#Remove tar archive after extract
+rm linux-5.6.19.tar.xz
+#Move to folder linux-5.6.19 obtain for extract tar archive
+cd linux-5.6.19/
+#Elements a compile custom kernel
 make menuconfig
 #Build and compile custom kernel and create entries for utilisation and deb packages creates
 #kaisenlinux can be replace by your choice name of your custom kernel
-make-kpkg --append-to-version=-kaisenlinux --revision=1.0 --initrd --us --uc kernel_image kernel_headers -j $(nproc)
+make deb-pkg -j"$(nproc)" LOCALVERSION=-customkernel KDEB_PKGVERSION="$(make kernelversion)-1"
 #Move parent directory
 cd ..
-#Install kernel custom with all .deb packages generates by make-kpkg
+#Install kernel custom with all .deb packages generates by deb-pkg
 dpkg -i *.deb
